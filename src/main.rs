@@ -1,7 +1,7 @@
 mod pow;
 mod target;
 
-use pow::State;
+use pow::{State, BlockVersion};
 use target::Uint256;
 
 use std::fs::File;
@@ -59,7 +59,7 @@ fn main() {
             nonce_fixed: Default::default(),
             hash: Default::default(),
         };
-        let state = State::new(blookseed);
+        let mut state = State::new(BlockVersion::V1, blookseed);
         println!("result {:?}", state.check_pow(nonce));
     }
 }

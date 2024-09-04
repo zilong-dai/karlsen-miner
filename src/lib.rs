@@ -1,8 +1,8 @@
 pub mod pow;
 pub mod target;
 
-pub use pow::*;
-pub use target::*;
+pub use pow::{State, BlockSeed, BlockVersion};
+pub use target::Uint256;
 type Hash = Uint256;
 
 // use libc::{u32, u64, u8};
@@ -33,7 +33,7 @@ pub extern "C" fn karlsen(
         nonce_fixed: Default::default(),
         hash: Default::default(),
     };
-    let state = State::new(blookseed);
+    let mut state = State::new(BlockVersion::V1, blookseed);
     let hash = state.calculate_pow(nonce);
 
     for i in 0..4 {
